@@ -161,7 +161,15 @@ export function Ask() {
                     onSend={send}
                     thinking={thinking}
                     twinOffline={twinOffline}
-                    suggestions={messages.length === 0 ? SUGGESTIONS : []}
+                    suggestions={(() => {
+                      // Show all unasked suggestions, but only when the twin
+                      // isn't currently mid-reply.
+                      if (thinking) return []
+                      const asked = new Set(
+                        messages.filter((m) => m.role === 'user').map((m) => m.text.toLowerCase())
+                      )
+                      return SUGGESTIONS.filter((s) => !asked.has(s.toLowerCase()))
+                    })()}
                   />
                 }
               />
