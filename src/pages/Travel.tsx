@@ -196,19 +196,23 @@ function Globe({ active, setActive }: GlobeProps) {
   const graticulePath = useMemo(() => pathGen(geoGraticule10()) || '', [pathGen])
 
   // Pre-compute country paths & their fill kind
-  const countryPaths = useMemo(() => {
-    return countriesFC.features.map(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (f: any) => {
-        const c = countryByName.get(f.properties.name)
-        return {
-          name: f.properties.name as string,
-          d: pathGen(f) || '',
-          kind: (c?.kind ?? 'none') as CountryKind | 'none',
-          country: c,
-        }
+  type CountryPath = {
+    name: string
+    d: string
+    kind: CountryKind | 'none'
+    country: Country | undefined
+  }
+  const countryPaths = useMemo<CountryPath[]>(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return countriesFC.features.map((f: any): CountryPath => {
+      const c = countryByName.get(f.properties.name)
+      return {
+        name: f.properties.name as string,
+        d: pathGen(f) || '',
+        kind: (c?.kind ?? 'none') as CountryKind | 'none',
+        country: c,
       }
-    )
+    })
   }, [pathGen])
 
   // Park dots — only render if on near hemisphere

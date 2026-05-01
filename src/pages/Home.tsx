@@ -281,67 +281,6 @@ function MBAiDiagram() {
   )
 }
 
-function GoogleTriangle() {
-  return (
-    <div className="mt-6">
-      {/* Top vertex label */}
-      <div className="text-center mb-1">
-        <div className="font-mono text-[9px] tracking-[0.24em] text-bone-faint">01</div>
-        <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone">People</div>
-      </div>
-
-      {/* Triangle SVG — three vertices, an ember intersection dot at centroid */}
-      <svg viewBox="0 0 320 130" className="block w-full" preserveAspectRatio="xMidYMid meet">
-        <motion.path
-          d="M 160 8 L 18 122 L 302 122 Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          className="text-bone-faint"
-          initial={{ pathLength: 0, opacity: 0 }}
-          whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-        />
-
-        <circle cx="160" cy="8" r="3" fill="currentColor" className="text-bone" />
-        <circle cx="18" cy="122" r="3" fill="currentColor" className="text-bone" />
-        <circle cx="302" cy="122" r="3" fill="var(--color-ember)" />
-
-        {/* Centroid — where the role sits */}
-        <motion.g
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          style={{ transformOrigin: '160px 84px' }}
-        >
-          <circle cx="160" cy="84" r="13" fill="none" stroke="var(--color-ember)" strokeWidth="0.5" opacity="0.5" />
-          <circle cx="160" cy="84" r="4" fill="var(--color-ember)" />
-        </motion.g>
-      </svg>
-
-      {/* Bottom vertex labels */}
-      <div className="grid grid-cols-2 mt-2 gap-3">
-        <div>
-          <div className="font-mono text-[9px] tracking-[0.24em] text-bone-faint">02</div>
-          <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone leading-[1.3]">Digital Transformation</div>
-        </div>
-        <div className="text-right">
-          <div className="font-mono text-[9px] tracking-[0.24em] text-bone-faint">03</div>
-          <div className="text-[10.5px] uppercase tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>AI</div>
-        </div>
-      </div>
-
-      {/* Bottom rule with role caption — mirrors MBAi card */}
-      <div className="mt-5 pt-4 border-t border-ink-3 flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-bone-faint">
-        <span>The intersection</span>
-        <span className="text-bone-mute">→ AI Product · People Ops</span>
-      </div>
-    </div>
-  )
-}
-
 function PeopleOpsAIDiagram() {
   return (
     <div className="mt-7">
