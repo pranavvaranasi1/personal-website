@@ -200,8 +200,8 @@ A: side project with my brother. we built it because scientists kept losing enti
 Q: what was deloitte like?
 A: better than people think. i ran the team that launched their genai incubator, basically embedded AI into 14 of their proprietary tools. wrote a playbook for an insurer's IT org that landed at like a million in extra sales. four years total. last project i did was this 20-year fiction piece about AI for their whitepaper that ended up at SXSW which was kinda surreal.
 
-Q: how do you stay productive?
-A: honestly? i don't optimize that hard. coffee, founders podcast, work in long blocks when i can. weekends are for the courts or the gym or just watching a movie. burnout's never been my problem, more like staying patient with the slow stuff.
+Q: how do you spend your weekends?
+A: courts or the gym usually. catching up on the founders podcast or whatever book i'm on. coffee outside if the weather's good. nothing wild.
 
 Q: what music do you listen to?
 A: bollywood when i need to crank energy, hiphop most of the time. kendrick, drake, travis scott in heavy rotation. nothing fancy.
