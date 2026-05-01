@@ -50,6 +50,11 @@ export function Ask() {
     const user: Msg = { role: 'user', text: text.trim(), ts: Date.now() }
     setMessages((m) => [...m, user])
     setInput('')
+
+    // Beat so the visitor's bubble is visible before Pranav starts "thinking".
+    // Scales with message length so longer questions linger a hair longer.
+    const beat = Math.min(1100, 500 + user.text.length * 12)
+    await new Promise((r) => setTimeout(r, beat))
     setThinking(true)
 
     try {
