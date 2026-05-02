@@ -16,7 +16,7 @@ export function CharacterPicker({ onPick }: PickerProps) {
         Pick a character. They'll sit next to me in the chat. (Yes, this is silly. It's also more fun than a chat box.)
       </p>
 
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-[1100px]">
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 max-w-[920px]">
         {CHARACTERS.map((c, i) => (
           <motion.button
             key={c.id}

@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react'
 const W = 28
 const H = 36
 
-export type CharacterId = 'short' | 'long' | 'bald' | 'cap' | 'curly'
+export type CharacterId = 'long' | 'bald' | 'cap' | 'curly'
 
 export interface CharacterDef {
   id: CharacterId
@@ -70,17 +70,6 @@ const FACE_AND_BODY: Record<number, string> = {
 
 // Hair-only rows for each character (rows 0-8, plus optional row 9 override)
 const HAIRS: Record<CharacterId, { rows: Record<number, string>; replaceFace?: Record<number, string> }> = {
-  // short brown hair, sweeps right
-  short: {
-    rows: {
-      3: '...........AAAAAA...........',
-      4: '.........AAAAAAAAAAA........',
-      5: '........AAAAAAAAAAAA........',
-      6: '.......AAAAAAAAAAAAAA.......',
-      7: '......AAAAAAAAAAAAAAA.......',
-      8: '......AAAAAAAAAAAAAAA.......',
-    },
-  },
   // long flowing hair past shoulders
   long: {
     rows: {
@@ -188,18 +177,6 @@ const PALETTE_DEFAULTS: Record<string, string> = {
 }
 
 export const CHARACTERS: CharacterDef[] = [
-  {
-    id: 'short',
-    label: 'The Friend',
-    description: 'Short hair, blue hoodie. Just got off work.',
-    palette: {
-      A: '#3d2a1c', B: '#5c3f28',
-      E: '#d4a47a', N: '#e6b890', D: '#b88160',
-      H: '#cdd5e0',
-      J: '#1a3d68', K: '#2a5a8e',
-    },
-    grid: makeGrid('short'),
-  },
   {
     id: 'long',
     label: 'The Writer',
