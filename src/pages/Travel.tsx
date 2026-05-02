@@ -16,15 +16,15 @@ const countryByName = new Map<string, Country>(countries.map((c) => [c.name, c])
 
 // Fill colors per country kind
 const COUNTRY_FILL: Record<CountryKind | 'none', string> = {
-  lived: 'oklch(0.66 0.18 25)',
-  visited: 'oklch(0.50 0.14 25)',
+  lived: 'oklch(0.66 0.18 150)',
+  visited: 'oklch(0.50 0.14 150)',
   wanted: 'oklch(0.36 0.014 280)',
   none: 'oklch(0.26 0.014 280)',
 }
 
 const COUNTRY_STROKE: Record<CountryKind | 'none', string> = {
-  lived: 'oklch(0.78 0.16 25)',
-  visited: 'oklch(0.62 0.14 25)',
+  lived: 'oklch(0.78 0.16 150)',
+  visited: 'oklch(0.62 0.14 150)',
   wanted: 'oklch(0.48 0.012 80)',
   none: 'oklch(0.40 0.014 280)',
 }
@@ -291,8 +291,8 @@ function Globe({ active, setActive }: GlobeProps) {
             <stop offset="100%" stopColor="oklch(0.10 0.010 280)" />
           </radialGradient>
           <radialGradient id="globe-rim" cx="50%" cy="50%" r="50%">
-            <stop offset="92%" stopColor="oklch(0.72 0.18 25 / 0)" />
-            <stop offset="100%" stopColor="oklch(0.72 0.18 25 / 0.18)" />
+            <stop offset="92%" stopColor="oklch(0.72 0.18 150 / 0)" />
+            <stop offset="100%" stopColor="oklch(0.72 0.18 150 / 0.18)" />
           </radialGradient>
           <filter id="park-glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="2" result="b" />

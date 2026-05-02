@@ -163,8 +163,8 @@ function ProteinHelix() {
     <svg viewBox="-100 -100 200 200" className="w-full h-full">
       <defs>
         <radialGradient id="emberDot">
-          <stop offset="0%" stopColor="oklch(0.72 0.18 25)" />
-          <stop offset="100%" stopColor="oklch(0.45 0.14 25)" />
+          <stop offset="0%" stopColor="oklch(0.72 0.18 150)" />
+          <stop offset="100%" stopColor="oklch(0.45 0.14 150)" />
         </radialGradient>
         <radialGradient id="boneDot">
           <stop offset="0%" stopColor="oklch(0.96 0.008 80)" />

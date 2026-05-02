@@ -420,7 +420,7 @@ function PathBody({ stops }: { stops: PathStop[] }) {
           style={{
             top: dotTop,
             background: 'var(--color-ember)',
-            boxShadow: '0 0 24px oklch(0.62 0.18 25 / 0.7)',
+            boxShadow: '0 0 24px oklch(0.62 0.18 150 / 0.7)',
           }}
         />
       </div>

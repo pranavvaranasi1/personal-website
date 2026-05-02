@@ -13,13 +13,15 @@
   --color-bone: oklch(0.96 0.008 80);
   --color-bone-mute: oklch(0.78 0.012 80);
   --color-bone-faint: oklch(0.55 0.014 80);
-  --color-ember: oklch(0.62 0.18 25);
-  --color-ember-low: oklch(0.45 0.14 25);
-  --color-ember-glow: oklch(0.72 0.16 25 / 0.18);
+  /* Accent — emerald green. Was oxblood at hue 25, now hue 150 (green).
+     Variable name kept as `ember` so 52 call sites don't have to change. */
+  --color-ember: oklch(0.62 0.18 150);
+  --color-ember-low: oklch(0.45 0.14 150);
+  --color-ember-glow: oklch(0.74 0.18 150 / 0.18);
   --color-paper: oklch(0.95 0.013 80);
   --color-paper-ink: oklch(0.22 0.012 280);
   --color-paper-rule: oklch(0.78 0.012 80);
-  --color-paper-mark: oklch(0.55 0.16 25);
+  --color-paper-mark: oklch(0.55 0.16 150);
 
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-slow: cubic-bezier(0.19, 1, 0.22, 1);

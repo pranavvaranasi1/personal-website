@@ -41,8 +41,8 @@ export function CoffeeShop({
   }, [])
 
   const charScale = isMobile ? 3.5 : 6
-  const speakerColor = speaker === 'pranav' ? 'oklch(0.62 0.18 25)' : 'oklch(0.78 0.012 80)'
-  const speakerAccent = speaker === 'pranav' ? 'oklch(0.72 0.18 25)' : 'oklch(0.78 0.012 80)'
+  const speakerColor = speaker === 'pranav' ? 'oklch(0.62 0.18 150)' : 'oklch(0.78 0.012 80)'
+  const speakerAccent = speaker === 'pranav' ? 'oklch(0.72 0.18 150)' : 'oklch(0.78 0.012 80)'
 
   return (
     <div className="relative w-full max-w-[1100px] mx-auto rounded-sm overflow-hidden border border-ink-3 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">

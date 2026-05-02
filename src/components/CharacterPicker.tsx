@@ -31,7 +31,7 @@ export function CharacterPicker({ onPick }: PickerProps) {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-sm"
               style={{
-                background: 'radial-gradient(circle at 50% 30%, oklch(0.72 0.16 25 / 0.18), transparent 60%)',
+                background: 'radial-gradient(circle at 50% 30%, oklch(0.72 0.16 150 / 0.18), transparent 60%)',
               }}
             />
             <div className="relative z-10">
