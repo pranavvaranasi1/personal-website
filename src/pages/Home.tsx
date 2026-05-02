@@ -81,8 +81,8 @@ function Hero() {
             style={{ background: 'radial-gradient(circle, var(--color-ember-glow) 0%, transparent 70%)' }}
           />
           <div
-            className="relative overflow-hidden rounded-[2px]"
-            style={{ height: 'min(58vh, 600px)', aspectRatio: '4 / 5' }}
+            className="relative overflow-hidden rounded-[2px] mx-auto"
+            style={{ height: 'min(46vh, 600px)', aspectRatio: '4 / 5', maxWidth: '78%' }}
           >
             <img
               src={pranavPhoto}
@@ -115,7 +115,9 @@ const FLOATING_ICONS = [
 
 function FloatingIcons() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+    // Hide on phones — the absolute-positioned icons scatter across the
+    // stacked mobile layout and overlap the photo / text.
+    <div className="pointer-events-none absolute inset-0 overflow-hidden hidden sm:block" aria-hidden>
       {FLOATING_ICONS.map((it, i) => {
         const Icon = it.Icon
         return (
@@ -451,8 +453,9 @@ function PathChapter({ stop, index, total }: { stop: PathStop; index: number; to
         <div
           className="font-display font-medium leading-none tracking-tighter"
           style={{
-            fontSize: 'clamp(110px, 16vw, 240px)',
+            fontSize: 'clamp(72px, 16vw, 240px)',
             color: 'oklch(0.21 0.014 280)',
+            opacity: 0.7,
           }}
         >
           {stop.year}

@@ -197,8 +197,22 @@ function AdaptSection() {
   const p = projects[1]
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const tilt = useTransform(scrollYProgress, [0, 0.5, 1], [25, 0, -25])
-  const yShift = useTransform(scrollYProgress, [0, 1], [60, -60])
+
+  // Dampen the parallax tilt on phones so the phone mockup doesn't rotate
+  // past its container on narrow screens.
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  const tiltMax = isMobile ? 8 : 25
+  const yMax = isMobile ? 24 : 60
+
+  const tilt = useTransform(scrollYProgress, [0, 0.5, 1], [tiltMax, 0, -tiltMax])
+  const yShift = useTransform(scrollYProgress, [0, 1], [yMax, -yMax])
 
   return (
     <section ref={ref} id="project-adapt" className="gutter py-32 md:py-40 border-t border-ink-3 relative overflow-hidden bg-ink-2/30 scroll-mt-8">
