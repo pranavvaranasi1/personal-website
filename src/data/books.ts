@@ -32,7 +32,7 @@ export const books: Book[] = [
     genre: 'Memoir',
     spine: '#e8b833',
     cover: greenlightsCover,
-    note: `McConaughey's whole thing is playing yourself instead of some polished version of yourself. He calls it finding your character. Once you've got that, going with the flow isn't a cop-out, it's the strategy. You catch greenlights because you stop fighting the current. I reread it every couple years just to loosen my grip on things.`,
+    note: `My favorite memoir, easily. McConaughey calls it finding your character. Just being yourself, on purpose. I reread this every couple years when I'm gripping too tight.`,
   },
   {
     rank: 2,
@@ -42,7 +42,7 @@ export const books: Book[] = [
     genre: 'Fiction',
     spine: '#1a3a6b',
     cover: projectHailMaryCover,
-    note: `The book I send to people who say they're not into sci-fi. Two beings from different planets, no shared language, no shared physics, and they figure out how to do science together because both of them want to know what's going on. Rocky lives in my head now.`,
+    note: `Send this to anyone who claims they don't do sci-fi. Trust me on it. Rocky is one of my favorite characters in any book.`,
   },
   {
     rank: 3,
@@ -52,7 +52,7 @@ export const books: Book[] = [
     genre: 'Memoir',
     spine: '#0f0f0f',
     cover: ovitzCover,
-    note: `Ovitz built CAA by treating relationships like a craft. Not networking. Actually knowing people, what they want, what they're scared of, how to stay useful to them over decades. The drive is the other half. He worked the way most people only pretend to. I'd hand this to anyone who thinks "hard work" is a complete strategy. It isn't. The other half is who you do it with.`,
+    note: `The best book I've read on power. Ovitz built CAA on relentless work and treating relationships like a craft, and he's honest about both. If you've ever been told to just "hustle harder", this is the better answer.`,
   },
   {
     rank: 4,
@@ -62,7 +62,7 @@ export const books: Book[] = [
     genre: 'Strategy',
     spine: '#1f1c2c',
     cover: masteryCover,
-    note: `The closest thing I've read to a career playbook. Greene's argument is that mastery comes in phases. First an apprenticeship. Then a long stretch of building your own creative point of view. Then mastery. It made me okay with the idea that I'm still in phase one. The chapters on Da Vinci, Coltrane, and Goethe make it land.`,
+    note: `Only career book I've kept. The big idea is you spend a long time being good at something before you have anything original to say about it. The Da Vinci chapter alone is worth it.`,
   },
   {
     rank: 5,

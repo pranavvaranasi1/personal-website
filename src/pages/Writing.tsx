@@ -11,7 +11,7 @@ export function Writing() {
     <>
       <header className="gutter pt-10 md:pt-16 pb-16">
         <Reveal>
-          <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Writing · {articles.length} essays</div>
+          <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Writing</div>
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="mt-4 font-display text-5xl md:text-8xl tracking-tight max-w-[18ch] text-balance leading-[0.96]">

@@ -80,22 +80,12 @@ export function StudioView() {
               <li>Designed with the <a className="underline decoration-ember underline-offset-4" href="https://impeccable.style" target="_blank" rel="noreferrer">impeccable</a> design skill</li>
             </ul>
 
-            <h2 className="font-display text-3xl text-bone tracking-tight mt-10">What's not on the site (yet)</h2>
-            <ul className="list-disc pl-5 space-y-1 text-[14px]">
-              <li>Real photographs from National Parks</li>
-              <li>Final travel pin list (the current one is a placeholder)</li>
-              <li>Variant Labs demo video</li>
-              <li>Anthropic API key wired through a Cloudflare Worker</li>
-            </ul>
           </div>
         </div>
       )}
 
       {tab === 'prompt' && (
         <div>
-          <p className="text-[14px] text-bone-mute mb-4 max-w-[60ch]">
-            This is exactly what's sent to Claude when you message my digital twin. No tricks, no hidden instructions. If you want to clone the pattern, the whole thing is below.
-          </p>
           <pre className="font-mono text-[12px] leading-[1.7] text-bone-mute bg-ink-2 border border-ink-3 rounded-sm p-6 overflow-x-auto whitespace-pre-wrap">
 {askPranavSystemPrompt}
           </pre>

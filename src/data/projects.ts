@@ -36,7 +36,7 @@ export const projects: Project[] = [
   {
     key: 'medicast',
     name: 'Medicast',
-    tagline: 'AI-generated podcasts for doctors who don\'t have time to read papers.',
+    tagline: 'AI-generated podcasts for doctors who don\'t have time to read research papers.',
     role: 'Builder',
     year: '2024 — Now',
     description: `iOS app that generates a personalized podcast in your medical specialty. Tell it cardiology, you get cardiology. Push notification when it's ready. Listen on your commute.`,

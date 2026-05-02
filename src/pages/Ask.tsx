@@ -125,8 +125,9 @@ export function Ask() {
           </h1>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="mt-6 max-w-[58ch] text-bone-mute text-[17px] leading-[1.7]">
-            This is Claude running a system prompt I wrote. Pick a character and ask anything.
+          <p className="mt-6 max-w-[80ch] text-bone-mute text-[17px] leading-[1.7]">
+            <span className="block whitespace-nowrap">This is Claude running a system prompt I wrote.</span>
+            <span className="block">Pick a character and ask anything.</span>
           </p>
         </Reveal>
       </header>

@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react'
 const W = 28
 const H = 36
 
-export type CharacterId = 'short' | 'long' | 'bald' | 'cap'
+export type CharacterId = 'short' | 'long' | 'bald' | 'cap' | 'curly'
 
 export interface CharacterDef {
   id: CharacterId
@@ -138,6 +138,35 @@ const HAIRS: Record<CharacterId, { rows: Record<number, string>; replaceFace?: R
       9:  '......AAAEEEEEEEEEEAAAAAA...',
     },
   },
+  // shoulder-length curly hair, hoop earrings
+  curly: {
+    rows: {
+      2: '..........AAABBAAAA.........',
+      3: '........AABBAABBAABBA.......',
+      4: '.......AABBAABBAABBAAB......',
+      5: '......AABBAABBAABBAABBA.....',
+      6: '.....AABBAABBAABBAABBAAB....',
+      7: '....AABBAABBAABBAABBAABBA...',
+      8: '....AABBAABBAABBAABBAABBA...',
+    },
+    replaceFace: {
+      // hair frames the face on both sides
+      9:  '....AAAEEEEEEEEEEAAAABBA....',
+      10: '...AABBEEEEEEEEEEEEAAAAA....',
+      11: '..AABEEEEEEEEEEEEEEEAAAA....',
+      12: '..ABEEEEEEEEEEEEEEEEEABA....',
+      // hoop earring on each side, lining up with the cheekbone
+      13: '..AAEEIIEGGEEEEEEEEGGEIIEAA.',
+      14: '..AAEEIIEGGEEEEEEEEGGEIIEAA.',
+      15: '..AAEEEEEEEEEENEEEEEEEEAA...',
+      16: '..AAEEEEEEEEDDEEEEEEEE......',
+      17: '..AAEEEEEEEDDDEEEEEEEAA.....',
+      18: '..AAEEEEEEEDDEEEEEEEEAA.....',
+      // hair tips along jawline
+      22: '..AAEEEEEEEEEEEEEEEEAAA.....',
+      23: '...AAEEEEEEEEEEEEEEAA.......',
+    },
+  },
 }
 
 const PALETTE_DEFAULTS: Record<string, string> = {
@@ -208,6 +237,20 @@ export const CHARACTERS: CharacterDef[] = [
       I: '#cf3a3a', // cap red
     },
     grid: makeGrid('cap'),
+  },
+  {
+    id: 'curly',
+    label: 'The Friend',
+    description: 'Curly hair, hoop earrings. Always knows the move.',
+    palette: {
+      A: '#1f1010', B: '#3d1c14',
+      E: '#d4a47a', N: '#e6b890', D: '#b88160',
+      L: '#a8323a',
+      H: '#e8dccb',
+      J: '#1f3a2a', K: '#2a5a3a',
+      I: '#cdaa56', // gold hoop earring
+    },
+    grid: makeGrid('curly'),
   },
 ]
 

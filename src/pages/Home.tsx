@@ -170,15 +170,7 @@ function Now() {
 
             <PeopleOpsAIDiagram />
 
-            <blockquote className="mt-10">
-              <div className="h-px w-12 mb-4" style={{ background: 'var(--color-ember)' }} />
-              <p className="font-display tracking-tight leading-[1.08] text-balance text-bone" style={{ fontSize: 'clamp(28px, 3.8vw, 40px)' }}>
-                This is the reason I came to{' '}
-                <span style={{ color: 'var(--color-ember)' }}>MBAi</span>.
-              </p>
-            </blockquote>
-
-            <p className="mt-6 text-bone-mute text-[15.5px] leading-[1.75] max-w-[44ch]">
+            <p className="mt-8 text-bone-mute text-[15.5px] leading-[1.75] max-w-[44ch]">
               AI is going to rewire how companies hire, grow, and move people. People Operations is where that change actually lands. I want a seat in that room while it's being figured out.
             </p>
           </Reveal>
@@ -329,7 +321,7 @@ function Bio() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="font-display text-[28px] md:text-[37px] leading-[1.18] tracking-tight text-pretty">
-            <span style={{ color: 'var(--color-ember)' }}>I love exploring how AI is used and where it's heading.</span> I write essays about what it's doing to us. I coach 6th-grade basketball, photograph national parks, and once had a background role in a Leonardo DiCaprio movie.
+            <span style={{ color: 'var(--color-ember)' }}>I love exploring how AI is used and where it's heading.</span> I write on Substack about what it's doing to us. I coached 6th-grade basketball, take RV trips to national parks, and once had a background role in a Leonardo DiCaprio movie.
           </p>
         </Reveal>
       </div>

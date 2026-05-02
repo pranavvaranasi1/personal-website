@@ -73,6 +73,10 @@ export function CoffeeShop({
           </motion.div>
         </div>
 
+        {/* Foreground cups — z above characters so they read as sitting on the
+            counter in front of each person. Steam wisps animate continuously. */}
+        <SteamingCups />
+
         {/* Desktop dialogue (floats inside scene) — sm and up only */}
         {line && (
           <motion.div
@@ -389,4 +393,83 @@ function BrickWall() {
     }
   }
   return <g>{bricks}</g>
+}
+
+/**
+ * Foreground cups + animated steam, rendered above characters so they read as
+ * sitting on the counter in front of each person. Two cups: visitor (cream) on
+ * the left, Pranav (espresso) on the right. Steam wisps loop with Framer
+ * Motion so the coffee always looks freshly poured.
+ */
+function SteamingCups() {
+  return (
+    <div className="absolute inset-x-0 bottom-[6%] sm:bottom-[7%] flex justify-around px-[7%] sm:px-[10%] z-20 pointer-events-none">
+      <Cup color="#e8dccb" rim="#3d2418" />
+      <Cup color="#1a0d08" rim="#3d2218" liquid="#5b3416" />
+    </div>
+  )
+}
+
+function Cup({ color, rim, liquid }: { color: string; rim: string; liquid?: string }) {
+  // Cup is drawn at native pixel scale; the parent constrains it to the scene.
+  const w = 36
+  const h = 26
+  return (
+    <div className="relative" style={{ imageRendering: 'pixelated' }}>
+      <svg viewBox={`0 0 ${w} ${h}`} width={w * 1.3} height={h * 1.3} shapeRendering="crispEdges">
+        {/* steam — three wisps, animated via SMIL-style values cycling */}
+        {[0, 1, 2].map((i) => (
+          <g key={i}>
+            <rect x={10 + i * 5} y={0} width={1} height={2} fill="#fff" opacity="0">
+              <animate
+                attributeName="y"
+                values={`6;0;-4`}
+                dur="2.4s"
+                begin={`${i * 0.4}s`}
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values={`0;0.55;0`}
+                dur="2.4s"
+                begin={`${i * 0.4}s`}
+                repeatCount="indefinite"
+              />
+            </rect>
+            <rect x={11 + i * 5} y={2} width={1} height={2} fill="#fff" opacity="0">
+              <animate
+                attributeName="y"
+                values={`8;2;-2`}
+                dur="2.4s"
+                begin={`${i * 0.4 + 0.2}s`}
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values={`0;0.4;0`}
+                dur="2.4s"
+                begin={`${i * 0.4 + 0.2}s`}
+                repeatCount="indefinite"
+              />
+            </rect>
+          </g>
+        ))}
+
+        {/* cup body */}
+        <rect x="6" y="10" width="22" height="14" fill={color} />
+        {/* rim */}
+        <rect x="5" y="9" width="24" height="2" fill={rim} />
+        {/* coffee surface (when visible from above) */}
+        {liquid && <rect x="8" y="11" width="18" height="2" fill={liquid} />}
+        {/* handle */}
+        <rect x="28" y="13" width="3" height="7" fill={color} />
+        <rect x="29" y="14" width="2" height="5" fill={rim} opacity="0.5" />
+        {/* saucer */}
+        <rect x="3" y="23" width="28" height="2" fill={rim} />
+        <rect x="4" y="24" width="26" height="1" fill="#1a0d08" opacity="0.6" />
+        {/* highlight on the cup */}
+        <rect x="9" y="13" width="2" height="6" fill="#fff" opacity="0.12" />
+      </svg>
+    </div>
+  )
 }

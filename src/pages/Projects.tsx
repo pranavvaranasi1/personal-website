@@ -232,7 +232,7 @@ function AdaptSection() {
         <div className="md:col-span-6 md:col-start-7">
           <Reveal>
             <div className="flex items-baseline gap-4 mb-3">
-              <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">02 · {p.year}</span>
+              <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">02</span>
               <span className="text-[11px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
             </div>
           </Reveal>
@@ -399,7 +399,7 @@ function MedicastSection() {
     <section ref={ref} id="project-medicast" className="gutter py-32 md:py-40 border-t border-ink-3 relative overflow-hidden scroll-mt-8">
       <Reveal>
         <div className="flex items-baseline gap-4 mb-3">
-          <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">03 · {p.year}</span>
+          <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">03</span>
           <span className="text-[11px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
         </div>
       </Reveal>
@@ -548,7 +548,7 @@ function ActingSection() {
         <div className="md:col-span-7 md:col-start-1">
           <Reveal delay={0.15}>
             <p className="font-display text-[24px] md:text-[28px] leading-[1.25] text-bone-mute max-w-[36ch] text-balance">
-              Background work, on the side. <em>Don't Look Up</em> was the biggest one.
+              <em>Don't Look Up</em> was the best side quest.
             </p>
           </Reveal>
         </div>
@@ -557,9 +557,6 @@ function ActingSection() {
             <div className="space-y-5 text-[17px] leading-[1.75] text-bone-mute">
               <p>
                 Acting was a way to be in rooms I'd otherwise never be in. The biggest one was <em>Don't Look Up</em>. A few seconds in the mission control scenes with Leonardo DiCaprio and Jonah Hill. Smaller ones along the way: a Bank of America corporate training video, and a local commercial where I played a dad with a baby stroller.
-              </p>
-              <p className="relative pl-6 border-l border-ember-low text-bone">
-                None of it adds up to a career. All of it taught me something about presence and repetition I didn't know I needed.
               </p>
             </div>
           </Reveal>
