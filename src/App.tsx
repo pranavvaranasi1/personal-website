@@ -3,6 +3,7 @@ import { ModeProvider, useMode } from './modes/ModeContext'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
 import { AskPill } from './components/AskPill'
+import { ScrollToTop } from './components/ScrollToTop'
 import { Home } from './pages/Home'
 import { Projects } from './pages/Projects'
 import { Writing } from './pages/Writing'
@@ -53,6 +54,7 @@ function ModeAwareApp() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ModeProvider>
         <ModeAwareApp />
       </ModeProvider>
