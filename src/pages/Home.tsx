@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import {
-  Volleyball,
   Bot,
   Dna,
   Camera,
@@ -15,6 +14,29 @@ import {
   Headphones,
   Zap,
 } from 'lucide-react'
+
+// Basketball icon — lucide-react doesn't ship one, so this mirrors their
+// stroke convention (24x24 viewBox, currentColor, props for size/strokeWidth).
+function Basketball({ size = 24, strokeWidth = 2, style }: { size?: number; strokeWidth?: number; style?: React.CSSProperties }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={style}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="2" x2="12" y2="22" />
+      <path d="M 4.93 4.93 C 9 9 9 15 4.93 19.07" />
+      <path d="M 19.07 4.93 C 15 9 15 15 19.07 19.07" />
+    </svg>
+  )
+}
 import { profile } from '../data/profile'
 import { Reveal, SplitWords } from '../components/Reveal'
 import pranavPhoto from '../assets/pranav.jpg'
@@ -99,7 +121,7 @@ function Hero() {
 }
 
 const FLOATING_ICONS = [
-  { Icon: Volleyball,     top: '14%', left: '46%', size: 40, drift: 14, dur: 5.2, rot: -8,  delay: 0.0, op: 0.85 },
+  { Icon: Basketball,   top: '14%', left: '46%', size: 40, drift: 14, dur: 5.2, rot: -8,  delay: 0.0, op: 0.85 },
   { Icon: Bot,          top: '78%', left: '8%',  size: 32, drift: 10, dur: 4.4, rot:  6,  delay: 0.4, op: 0.75 },
   { Icon: Dna,          top: '22%', left: '4%',  size: 28, drift: 12, dur: 4.8, rot: -5,  delay: 0.9, op: 0.7  },
   { Icon: Camera,       top: '8%',  left: '88%', size: 30, drift:  9, dur: 4.0, rot:  10, delay: 0.2, op: 0.8  },
