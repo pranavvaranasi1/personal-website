@@ -589,20 +589,31 @@ function ActingCarousel() {
   const [paused, setPaused] = useState(false)
   const [inView, setInView] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const hasBeenSeen = useRef(false)
   const total = ACTING_SLIDES.length
 
+  // Only auto-advance while the carousel is on-screen AND not hover-paused.
+  // This prevents the slide from being on image 3 by the time the visitor
+  // actually scrolls down to it.
   useEffect(() => {
-    if (paused) return
+    if (paused || !inView) return
     const t = setTimeout(() => setIndex((i) => (i + 1) % total), SLIDE_DURATION)
     return () => clearTimeout(t)
-  }, [index, paused, total])
+  }, [index, paused, inView, total])
 
-  // Track in-view so arrow keys only steal focus when the carousel is on-screen
+  // Track in-view AND reset to image 1 the FIRST time it scrolls into view
+  // so visitors always see the carousel start from the beginning.
   useEffect(() => {
     const node = containerRef.current
     if (!node) return
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        setInView(entry.isIntersecting)
+        if (entry.isIntersecting && !hasBeenSeen.current) {
+          hasBeenSeen.current = true
+          setIndex(0)
+        }
+      },
       { threshold: 0.4 }
     )
     observer.observe(node)

@@ -1,6 +1,15 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
-export type Mode = 'human' | 'agent' | 'studio'
+/**
+ * Two persistent modes:
+ * - 'human'   = the normal site (default)
+ * - 'machine' = structured plain-text view for AI crawlers
+ *
+ * "Agent" is not a mode — it's a button on the toggle that navigates to
+ * /ask within human mode. Visual highlight on the toggle is computed from
+ * the current pathname, not from this state.
+ */
+export type Mode = 'human' | 'machine'
 
 interface ModeContextValue {
   mode: Mode
@@ -13,9 +22,13 @@ const BOT_REGEX = /bot|crawler|spider|crawling|gptbot|claude-?web|anthropic|open
 
 function detectInitialMode(): Mode {
   if (typeof window === 'undefined') return 'human'
-  const stored = window.localStorage.getItem('pranav-mode') as Mode | null
-  if (stored === 'human' || stored === 'agent' || stored === 'studio') return stored
-  if (BOT_REGEX.test(navigator.userAgent)) return 'agent'
+  const stored = window.localStorage.getItem('pranav-mode')
+  if (stored === 'human') return 'human'
+  if (stored === 'machine') return 'machine'
+  // Migrate legacy values: old 'agent' (was plaintext) and 'studio' both
+  // collapse to 'machine'. Default everything else to human.
+  if (stored === 'agent' || stored === 'studio') return 'machine'
+  if (BOT_REGEX.test(navigator.userAgent)) return 'machine'
   return 'human'
 }
 

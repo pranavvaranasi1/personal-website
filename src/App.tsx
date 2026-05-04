@@ -10,30 +10,22 @@ import { Writing } from './pages/Writing'
 import { Travel } from './pages/Travel'
 import { Ask } from './pages/Ask'
 import { Books } from './pages/Books'
-import { AgentView } from './modes/AgentView'
-import { StudioView } from './modes/StudioView'
+import { MachineView } from './modes/MachineView'
 
 function ModeAwareApp() {
   const { mode } = useMode()
 
-  if (mode === 'agent') {
+  if (mode === 'machine') {
     return (
       <div className="min-h-screen grain">
-        <AgentView />
+        <MachineView />
       </div>
     )
   }
 
-  if (mode === 'studio') {
-    return (
-      <div className="min-h-screen grain">
-        <Nav />
-        <StudioView />
-        <Footer />
-      </div>
-    )
-  }
-
+  // Human mode (default). Agent button on the toggle just routes to /ask
+  // within this same layout, so it shows the Ask Pranav page with the
+  // regular nav and footer around it.
   return (
     <div className="min-h-screen grain">
       <Nav />

@@ -50,14 +50,9 @@
     overflow-x: hidden;
   }
 
-  body[data-mode='agent'] {
+  body[data-mode='machine'] {
     background: var(--color-paper);
     color: var(--color-paper-ink);
-  }
-
-  body[data-mode='studio'] {
-    background: var(--color-ink);
-    color: var(--color-bone);
   }
 
   ::selection {

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ModeToggle } from './ModeToggle'
-import { useMode } from '../modes/ModeContext'
 
 const links = [
   { to: '/', label: 'Home', end: true },
@@ -11,11 +10,9 @@ const links = [
   { to: '/writing', label: 'Writing' },
   { to: '/books', label: 'Books' },
   { to: '/travel', label: 'Travel' },
-  { to: '/ask', label: 'Ask Pranav' },
 ]
 
 export function Nav() {
-  const { mode } = useMode()
   const [open, setOpen] = useState(false)
 
   // Lock body scroll when mobile menu is open
@@ -45,48 +42,44 @@ export function Nav() {
           </Link>
 
           {/* Desktop nav (md and up) */}
-          {mode !== 'agent' && (
-            <nav className="hidden md:flex items-center gap-7 text-[13px] uppercase tracking-[0.18em]">
-              {links.map((l) => (
-                <NavLink
-                  key={l.to}
-                  to={l.to}
-                  end={l.end}
-                  className={({ isActive }) =>
-                    [
-                      'relative py-1 transition-colors duration-200',
-                      isActive ? 'text-bone' : 'text-bone-faint hover:text-bone',
-                    ].join(' ')
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      {l.label}
-                      {isActive && (
-                        <span
-                          className="absolute -bottom-0.5 left-0 right-0 h-px"
-                          style={{ background: 'var(--color-ember)' }}
-                        />
-                      )}
-                    </>
-                  )}
-                </NavLink>
-              ))}
-            </nav>
-          )}
+          <nav className="hidden md:flex items-center gap-7 text-[13px] uppercase tracking-[0.18em]">
+            {links.map((l) => (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                end={l.end}
+                className={({ isActive }) =>
+                  [
+                    'relative py-1 transition-colors duration-200',
+                    isActive ? 'text-bone' : 'text-bone-faint hover:text-bone',
+                  ].join(' ')
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {l.label}
+                    {isActive && (
+                      <span
+                        className="absolute -bottom-0.5 left-0 right-0 h-px"
+                        style={{ background: 'var(--color-ember)' }}
+                      />
+                    )}
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </nav>
 
           {/* Right cluster: hamburger (mobile) + ModeToggle */}
           <div className="flex items-center gap-3">
-            {mode !== 'agent' && (
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                aria-label="Open menu"
-                className="md:hidden text-bone-mute hover:text-ember transition-colors p-2 -mr-2"
-              >
-                <Menu size={22} strokeWidth={1.6} />
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+              className="md:hidden text-bone-mute hover:text-ember transition-colors p-2 -mr-2"
+            >
+              <Menu size={22} strokeWidth={1.6} />
+            </button>
             <ModeToggle />
           </div>
         </div>

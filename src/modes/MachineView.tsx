@@ -4,7 +4,7 @@ import { articles } from '../data/articles'
 import { countries, nationalParks } from '../data/locations'
 import { useMode } from './ModeContext'
 
-export function AgentView() {
+export function MachineView() {
   const { setMode } = useMode()
   return (
     <main
@@ -12,7 +12,7 @@ export function AgentView() {
       style={{ color: 'var(--color-paper-ink)', fontFamily: 'var(--font-mono)' }}
     >
       <div className="flex items-baseline justify-between border-b border-paper-rule pb-4 mb-8">
-        <div className="text-[11px] uppercase tracking-[0.2em] opacity-60">Agent mode · Plain-text view</div>
+        <div className="text-[11px] uppercase tracking-[0.2em] opacity-60">Machine mode · Plain-text view</div>
         <button
           onClick={() => setMode('human')}
           className="text-[11px] uppercase tracking-[0.2em] hover:underline"
