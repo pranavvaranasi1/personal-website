@@ -575,11 +575,13 @@ function ActingSection() {
   )
 }
 
+// `marker` positions Pranav in each frame as percentages of the image
+// (x from left, y from top). Used to draw a circle overlay.
 const ACTING_SLIDES = [
-  { src: actorStill1, caption: "Don't Look Up · 2021", credit: 'Mission Control' },
-  { src: actorStill2, caption: "Don't Look Up · 2021", credit: 'Wide Shot · HUD' },
-  { src: actorStill3, caption: "Don't Look Up · 2021", credit: 'Mid Cut · Headset' },
-  { src: actorStill4, caption: "Don't Look Up · 2021", credit: 'Final Sequence' },
+  { src: actorStill1, caption: "Don't Look Up · 2021", credit: 'Mission Control', marker: { x: 91, y: 32 } },
+  { src: actorStill2, caption: "Don't Look Up · 2021", credit: 'Wide Shot · HUD', marker: { x: 24, y: 40 } },
+  { src: actorStill3, caption: "Don't Look Up · 2021", credit: 'Mid Cut · Headset', marker: { x: 6, y: 36 } },
+  { src: actorStill4, caption: "Don't Look Up · 2021", credit: 'Final Sequence', marker: { x: 35, y: 32 } },
 ]
 
 const SLIDE_DURATION = 4500
@@ -647,17 +649,61 @@ function ActingCarousel() {
     >
       <div className="relative overflow-hidden rounded-sm bg-ink-2" style={{ aspectRatio: '16 / 9' }}>
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={index}
-            src={slide.src}
-            alt={slide.caption}
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 w-full h-full object-cover"
-            draggable={false}
-          />
+            className="absolute inset-0"
+          >
+            <img
+              src={slide.src}
+              alt={slide.caption}
+              className="absolute inset-0 w-full h-full object-cover"
+              draggable={false}
+            />
+
+            {/* "Where Pranav is" marker — circle + tiny label */}
+            {slide.marker && (
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  left: `${slide.marker.x}%`,
+                  top: `${slide.marker.y}%`,
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                {/* Pulsing outer ring */}
+                <motion.div
+                  className="absolute rounded-full border-2"
+                  style={{
+                    width: 'clamp(56px, 7vw, 90px)',
+                    height: 'clamp(56px, 7vw, 90px)',
+                    left: '50%',
+                    top: '50%',
+                    borderColor: 'var(--color-ember)',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                  animate={{ scale: [1, 1.18, 1], opacity: [0.9, 0.4, 0.9] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                {/* Tiny label */}
+                <div
+                  className="absolute font-mono text-[9px] tracking-[0.24em] uppercase whitespace-nowrap"
+                  style={{
+                    color: 'var(--color-ember)',
+                    top: 'clamp(38px, 4.6vw, 58px)',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    textShadow: '0 0 6px rgba(0,0,0,0.85)',
+                  }}
+                >
+                  pranav
+                </div>
+              </div>
+            )}
+          </motion.div>
         </AnimatePresence>
 
         {/* Counter */}
