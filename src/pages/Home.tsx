@@ -184,10 +184,7 @@ function Now() {
         <div className="md:col-span-9 grid md:grid-cols-2 gap-10 md:gap-14">
           {/* Google */}
           <Reveal>
-            <div className="flex items-center justify-between">
-              <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">01</div>
-              <img src={googleLogo} alt="Google" className="h-8 w-auto opacity-95" />
-            </div>
+            <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">01</div>
             <h3 className="mt-4 font-display text-3xl md:text-[34px] tracking-tight">Google · Summer 2026</h3>
 
             <PeopleOpsAIDiagram />
@@ -199,15 +196,7 @@ function Now() {
 
           {/* Northwestern MBAi */}
           <Reveal delay={0.1}>
-            <div className="flex items-center justify-between">
-              <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">02</div>
-              <img
-                src={kelloggLogo}
-                alt="Kellogg"
-                className="h-8 w-auto"
-                style={{ filter: 'brightness(0) invert(1)', opacity: 0.85 }}
-              />
-            </div>
+            <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">02</div>
             <h3 className="mt-4 font-display text-3xl md:text-[34px] tracking-tight">Northwestern · MBAi</h3>
 
             <MBAiDiagram />
