@@ -33,7 +33,7 @@ function Header() {
   return (
     <section className="gutter pt-10 md:pt-16 pb-16">
       <Reveal>
-        <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Projects · Four of them</div>
+        <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Projects</div>
       </Reveal>
       <Reveal delay={0.1}>
         <h1 className="mt-4 font-display text-5xl md:text-8xl tracking-tight max-w-[14ch] text-balance leading-[0.96]">
