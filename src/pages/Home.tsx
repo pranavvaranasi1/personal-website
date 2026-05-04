@@ -89,7 +89,7 @@ function Hero() {
           </span>
         </h1>
         <Reveal delay={0.6} className="mt-8 max-w-[34ch] text-[18px] md:text-[21px] text-bone-mute leading-snug text-pretty">
-          {profile.tagline} I'm at Northwestern getting a joint MBA and AI degree, heading to Google this summer for People Operations.
+          {profile.tagline} I'm at Northwestern Kellogg getting a joint MBA and AI degree, heading to Google this summer for People Operations.
         </Reveal>
       </motion.div>
 
