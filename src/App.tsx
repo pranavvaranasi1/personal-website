@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { ModeProvider, useMode } from './modes/ModeContext'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
@@ -50,6 +51,7 @@ export default function App() {
       <ModeProvider>
         <ModeAwareApp />
       </ModeProvider>
+      <Analytics />
     </BrowserRouter>
   )
 }
