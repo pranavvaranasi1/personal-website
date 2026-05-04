@@ -69,9 +69,9 @@
     color: var(--color-bone);
   }
 
-  body[data-mode='agent'] h1,
-  body[data-mode='agent'] h2,
-  body[data-mode='agent'] h3 {
+  body[data-mode='machine'] h1,
+  body[data-mode='machine'] h2,
+  body[data-mode='machine'] h3 {
     color: var(--color-paper-ink);
   }
 
