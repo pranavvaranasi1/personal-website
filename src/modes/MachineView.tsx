@@ -46,7 +46,8 @@ export function MachineView() {
         <ul className="list-disc pl-5 space-y-1 text-[14px]">
           <li>Northwestern MBAi (joint MBA + AI), Kellogg + McCormick. Graduating March 2027.</li>
           <li>Co-Founder of Variant Labs (TechBio AI copilot for protein scientists).</li>
-          <li>Incoming AI Product Intern at Google in People Operations, Summer 2026.</li>
+          <li>Completed AI Operations Program Manager Internship at Google in People Operations (Jun to Aug 2026).</li>
+          <li>Seeking full-time roles after graduation (March 2027): deployment strategist, product manager.</li>
           <li>AI Club Director of Research and Innovation; MBAi Marketing and Admissions Director.</li>
         </ul>
       </Section>

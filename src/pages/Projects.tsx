@@ -37,7 +37,7 @@ function Header() {
       </Reveal>
       <Reveal delay={0.1}>
         <h1 className="mt-4 font-display text-5xl md:text-8xl tracking-tight max-w-[14ch] text-balance leading-[0.96]">
-          Things I've actually <span style={{ color: 'var(--color-ember)' }}>built.</span>
+          What I've <span style={{ color: 'var(--color-ember)' }}>built.</span>
         </h1>
       </Reveal>
       <Reveal delay={0.25}>

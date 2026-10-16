@@ -28,10 +28,13 @@ export const countries: Country[] = [
   { name: 'Ecuador', kind: 'visited' },
   { name: 'Estonia', kind: 'visited' },
   { name: 'Greece', kind: 'visited' },
+  { name: 'Croatia', kind: 'visited' },
+  { name: 'Hungary', kind: 'visited' },
   { name: 'India', kind: 'visited', note: 'Family origin. Hyderabad, Mumbai, Delhi.' },
   { name: 'Italy', kind: 'visited' },
   { name: 'Mexico', kind: 'visited' },
   { name: 'Peru', kind: 'visited' },
+  { name: 'Portugal', kind: 'visited' },
   { name: 'Spain', kind: 'visited' },
   { name: 'United Kingdom', display: 'UK', kind: 'visited', note: 'Studied abroad in London. Walked the Thames Path on a weekend.' },
 ]

@@ -41,6 +41,7 @@ import { profile } from '../data/profile'
 import { Reveal, SplitWords } from '../components/Reveal'
 import pranavPhoto from '../assets/pranav.jpg'
 import googleLogo from '../assets/google.png'
+import { EmailMenu } from '../components/EmailMenu'
 import kelloggLogo from '../assets/kellogg.png'
 import brandeisLogo from '../assets/brandeis.svg'
 import deloitteLogo from '../assets/deloitte.svg'
@@ -89,7 +90,7 @@ function Hero() {
           </span>
         </h1>
         <Reveal delay={0.6} className="mt-8 max-w-[34ch] text-[18px] md:text-[21px] text-bone-mute leading-snug text-pretty">
-          {profile.tagline} I'm at Northwestern Kellogg getting a joint MBA and AI degree, heading to Google this summer for People Operations.
+          {profile.tagline} I'm at Northwestern Kellogg getting a joint MBA and AI degree, fresh off a summer at Google, and looking for a full-time role as a deployment strategist or product manager.
         </Reveal>
       </motion.div>
 
@@ -178,7 +179,7 @@ function Now() {
         <div className="md:col-span-3">
           <Reveal>
             <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Right now</div>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Two big things at once.</h2>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">One wrapped, one in progress.</h2>
           </Reveal>
         </div>
         <div className="md:col-span-9 grid md:grid-cols-2 gap-10 md:gap-14">
@@ -190,7 +191,7 @@ function Now() {
             <PeopleOpsAIDiagram />
 
             <p className="mt-8 text-bone-mute text-[15.5px] leading-[1.75] max-w-[44ch]">
-              AI is going to rewire how companies hire, grow, and move people. People Operations is where that change actually lands. I want a seat in that room while it's being figured out.
+              Spent the summer in People Operations finding 70+ pain points, getting 4 AI use cases approved, and building an agent that cut a 10-step search down to 2 (about 25 hours a week saved). Then I trained the team to use it.
             </p>
           </Reveal>
 
@@ -206,6 +207,23 @@ function Now() {
             </p>
           </Reveal>
         </div>
+      </div>
+      {/* Looking for: its own band, same 3/9 split as the section above */}
+      <div className="mt-20 md:mt-28 pt-12 md:pt-16 border-t border-ink-3 grid md:grid-cols-12 gap-10">
+        <Reveal className="md:col-span-3">
+          <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">What's next</div>
+        </Reveal>
+        <Reveal delay={0.1} className="md:col-span-9">
+          <h3 className="font-display text-4xl md:text-6xl tracking-tight text-balance">
+            Looking for a full-time role{' '}
+            <span style={{ color: 'var(--color-ember)' }}>starting spring 2027.</span>
+          </h3>
+          <p className="mt-6 text-bone-mute text-[16px] md:text-[17px] leading-[1.7] max-w-[56ch]">
+            Deployment strategist or product manager: getting AI into real organizations and making sure people actually use it. If that's a seat on your team, I'd love to talk.
+          </p>
+          <div className="mt-8"><EmailMenu /></div>
+          <div className="mt-4 font-mono text-[12px] text-bone-faint">{profile.email}</div>
+        </Reveal>
       </div>
     </section>
   )
@@ -316,8 +334,8 @@ function PeopleOpsAIDiagram() {
 
       {/* Bottom rule with metadata, mirrors MBAi card */}
       <div className="mt-6 pt-4 border-t border-ink-3 flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-bone-faint">
-        <span>AI Product Intern · NYC</span>
-        <span className="text-bone-mute">→ 12 weeks</span>
+        <span>AI Ops Program Manager Intern · NYC</span>
+        <span className="text-bone-mute">→ Jun — Aug 2026</span>
       </div>
     </div>
   )
@@ -387,10 +405,10 @@ function Path() {
       year: '2026',
       place: 'Google',
       city: 'New York, NY',
-      title: 'AI Product (incoming)',
-      tag: 'Summer · People Operations',
+      title: 'AI Operations',
+      tag: 'Internship · People Operations',
       icon: 'google',
-      body: 'Heading to Google this summer as an AI Product Intern in People Operations. Building AI for the team that builds Google.',
+      body: 'Summer internship as an AI Operations Program Manager in People Operations. Ran 15 discovery sessions, wrote the requirements doc that got 4 AI use cases approved, built a Drive auditing agent and a Gemini Notebook, and trained the team on 40 practical AI workflows.',
     },
   ]
   return <PathBody stops={stops} />
