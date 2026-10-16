@@ -56,3 +56,25 @@ export function SplitWords({ text, className, delay = 0, stagger = 0.06 }: Split
     </span>
   )
 }
+
+interface RevealHeadingProps {
+  children: ReactNode
+  delay?: number
+  className?: string
+}
+
+/** Headings wipe up from a baseline mask. Reveal (fade-up) stays for body copy. */
+export function RevealHeading({ children, delay = 0, className }: RevealHeadingProps) {
+  const reduce = useReducedMotion()
+  return (
+    <motion.div
+      initial={reduce ? { opacity: 0 } : { clipPath: 'inset(0 0 100% 0)', y: 28 }}
+      whileInView={reduce ? { opacity: 1 } : { clipPath: 'inset(0 0 0% 0)', y: 0 }}
+      viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
+      transition={{ duration: 1.1, delay, ease: [0.19, 1, 0.22, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}

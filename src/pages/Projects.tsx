@@ -1,7 +1,7 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { projects } from '../data/projects'
-import { Reveal } from '../components/Reveal'
+import { Reveal, RevealHeading } from '../components/Reveal'
 import medicastSxsw1 from '../assets/medicast-sxsw-1.jpg'
 import medicastSxsw2 from '../assets/medicast-sxsw-2.jpg'
 import variantPitch from '../assets/variant-labs-pitch.jpg'
@@ -33,7 +33,7 @@ function Header() {
   return (
     <section className="gutter pt-10 md:pt-16 pb-16">
       <Reveal>
-        <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Projects</div>
+        <div className="text-[12px] uppercase tracking-[0.24em] text-bone-faint">Projects</div>
       </Reveal>
       <Reveal delay={0.1}>
         <h1 className="mt-4 font-display text-5xl md:text-8xl tracking-tight max-w-[14ch] text-balance leading-[0.96]">
@@ -50,7 +50,7 @@ function Header() {
                 const el = document.getElementById(c.target)
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }}
-              className="group text-[11px] uppercase tracking-[0.2em] text-bone-mute border border-ink-3 hover:border-ember hover:text-ember transition-colors px-3.5 py-1.5 rounded-full"
+              className="group text-[12px] uppercase tracking-[0.2em] text-bone-mute border border-ink-3 hover:border-ember hover:text-ember transition-colors px-3.5 py-1.5 rounded-full"
             >
               {c.label}
               <span className="ml-2 opacity-50 group-hover:opacity-100 transition-opacity">→</span>
@@ -68,7 +68,8 @@ function VariantLabsSection() {
   const p = projects[0]
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const helixRot = useTransform(scrollYProgress, [0, 1], [0, 360])
+  const [phase, setPhase] = useState(0)
+  useMotionValueEvent(scrollYProgress, 'change', (v) => setPhase(v * Math.PI * 6))
 
   return (
     <section ref={ref} id="project-variant-labs" className="gutter py-24 md:py-32 border-t border-ink-3 relative overflow-hidden scroll-mt-8">
@@ -76,13 +77,11 @@ function VariantLabsSection() {
         <div className="md:col-span-7 md:order-1 order-2">
           <Reveal>
             <div className="flex items-baseline gap-4 mb-3">
-              <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">01</span>
-              <span className="text-[11px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
+              <span className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">01</span>
+              <span className="text-[12px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
             </div>
           </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-display text-5xl md:text-[88px] leading-[0.95] tracking-tight">{p.name}</h2>
-          </Reveal>
+          <RevealHeading delay={0.05}><h2 className="font-display text-5xl md:text-[88px] leading-[0.95] tracking-tight">{p.name}</h2></RevealHeading>
           <Reveal delay={0.15}>
             <p className="mt-5 font-display text-[24px] md:text-[28px] leading-[1.25] text-bone-mute max-w-[28ch] text-balance">
               {p.tagline}
@@ -91,31 +90,22 @@ function VariantLabsSection() {
           <Reveal delay={0.3}>
             <div className="mt-12 max-w-[60ch] space-y-5 text-[17px] leading-[1.75] text-bone-mute">
               <p>{p.description}</p>
-              <p className="relative pl-6 border-l border-ember-low text-bone">
+              <p className="font-display text-[21px] md:text-[23px] leading-[1.45] text-bone">
                 {p.story}
               </p>
             </div>
           </Reveal>
           <Reveal delay={0.4}>
-            <div className="mt-10 flex flex-wrap gap-2">
-              {p.stack.map((s) => (
-                <span key={s} className="font-mono text-[11px] tracking-wide text-bone-faint border border-ink-3 rounded-full px-3 py-1">
-                  {s}
-                </span>
-              ))}
-            </div>
+            <p className="mt-8 max-w-[52ch] text-[14px] leading-[1.7] text-bone-faint">Under the hood: {p.stack.join(', ')}.</p>
           </Reveal>
         </div>
 
         <div className="md:col-span-5 md:order-2 order-1 md:sticky md:top-32">
-          <motion.div
-            className="aspect-square w-full max-w-[480px] mx-auto relative"
-            style={{ rotate: helixRot }}
-          >
-            <ProteinHelix />
-          </motion.div>
-          <p className="mt-3 text-center font-mono text-[10px] tracking-[0.2em] text-bone-faint">
-            ALPHAFOLD · CHAI-2 · BOLTZ-2
+          <div className="aspect-square w-full max-w-[480px] mx-auto relative">
+            <ProteinHelix phase={phase} />
+          </div>
+          <p className="mt-3 text-center font-mono text-[12px] tracking-[0.2em] text-bone-faint">
+            THREE STRUCTURE MODELS, ONE CHAT (ILLUSTRATIVE)
           </p>
         </div>
       </div>
@@ -130,10 +120,10 @@ function VariantPitchSpread() {
     <div className="mt-20 md:mt-28 max-w-[640px]">
       <Reveal>
         <div className="flex items-baseline justify-between mb-4">
-          <span className="font-mono text-[11px] tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>
+          <span className="font-mono text-[12px] tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>
             ★ ON THE GROUND
           </span>
-          <span className="font-mono text-[10px] tracking-[0.22em] text-bone-faint">
+          <span className="font-mono text-[12px] tracking-[0.22em] text-bone-faint">
             VARIANT LABS · PITCH
           </span>
         </div>
@@ -153,7 +143,7 @@ function VariantPitchSpread() {
   )
 }
 
-function ProteinHelix() {
+function ProteinHelix({ phase = 0 }: { phase?: number }) {
   // Stylized double helix made of dots
   const turns = 4
   const perTurn = 14
@@ -172,7 +162,7 @@ function ProteinHelix() {
         </radialGradient>
       </defs>
       {dots.map((i) => {
-        const t = (i / total) * Math.PI * 2 * turns
+        const t = (i / total) * Math.PI * 2 * turns + phase
         const y = -85 + (i / total) * 170
         const x1 = Math.cos(t) * 36
         const x2 = Math.cos(t + Math.PI) * 36
@@ -224,7 +214,7 @@ function AdaptSection() {
           >
             <PhoneMock />
           </motion.div>
-          <p className="mt-6 text-center font-mono text-[10px] tracking-[0.2em] text-bone-faint">
+          <p className="mt-6 text-center font-mono text-[12px] tracking-[0.2em] text-bone-faint">
             iOS · SWIFT · HEALTHKIT
           </p>
         </div>
@@ -232,13 +222,11 @@ function AdaptSection() {
         <div className="md:col-span-6 md:col-start-7">
           <Reveal>
             <div className="flex items-baseline gap-4 mb-3">
-              <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">02</span>
-              <span className="text-[11px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
+              <span className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">02</span>
+              <span className="text-[12px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
             </div>
           </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-display text-5xl md:text-[88px] leading-[0.95] tracking-tight">{p.name}</h2>
-          </Reveal>
+          <RevealHeading delay={0.05}><h2 className="font-display text-5xl md:text-[88px] leading-[0.95] tracking-tight">{p.name}</h2></RevealHeading>
           <Reveal delay={0.15}>
             <p className="mt-5 font-display text-[24px] md:text-[28px] leading-[1.25] text-bone-mute max-w-[28ch] text-balance">
               {p.tagline}
@@ -247,17 +235,11 @@ function AdaptSection() {
           <Reveal delay={0.3}>
             <div className="mt-10 max-w-[55ch] space-y-5 text-[17px] leading-[1.75] text-bone-mute">
               <p>{p.description}</p>
-              <p className="relative pl-6 border-l border-ember-low text-bone">{p.story}</p>
+              <p className="font-display text-[21px] md:text-[23px] leading-[1.45] text-bone">{p.story}</p>
             </div>
           </Reveal>
           <Reveal delay={0.4}>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {p.stack.map((s) => (
-                <span key={s} className="font-mono text-[11px] tracking-wide text-bone-faint border border-ink-3 rounded-full px-3 py-1">
-                  {s}
-                </span>
-              ))}
-            </div>
+            <p className="mt-8 max-w-[52ch] text-[14px] leading-[1.7] text-bone-faint">Under the hood: {p.stack.join(', ')}.</p>
           </Reveal>
         </div>
       </div>
@@ -399,13 +381,11 @@ function MedicastSection() {
     <section ref={ref} id="project-medicast" className="gutter py-32 md:py-40 border-t border-ink-3 relative overflow-hidden scroll-mt-8">
       <Reveal>
         <div className="flex items-baseline gap-4 mb-3">
-          <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">03</span>
-          <span className="text-[11px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
+          <span className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">03</span>
+          <span className="text-[12px] uppercase tracking-[0.2em] text-bone-faint">{p.role}</span>
         </div>
       </Reveal>
-      <Reveal delay={0.05}>
-        <h2 className="font-display text-6xl md:text-[120px] leading-[0.92] tracking-tight">{p.name}</h2>
-      </Reveal>
+      <RevealHeading delay={0.05}><h2 className="font-display text-6xl md:text-[120px] leading-[0.92] tracking-tight">{p.name}</h2></RevealHeading>
 
       <div className="mt-10">
         <Waveform progress={scrollYProgress} />
@@ -423,17 +403,11 @@ function MedicastSection() {
           <Reveal delay={0.3}>
             <div className="space-y-5 text-[17px] leading-[1.75] text-bone-mute">
               <p>{p.description}</p>
-              <p className="relative pl-6 border-l border-ember-low text-bone">{p.story}</p>
+              <p className="font-display text-[21px] md:text-[23px] leading-[1.45] text-bone">{p.story}</p>
             </div>
           </Reveal>
           <Reveal delay={0.4}>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {p.stack.map((s) => (
-                <span key={s} className="font-mono text-[11px] tracking-wide text-bone-faint border border-ink-3 rounded-full px-3 py-1">
-                  {s}
-                </span>
-              ))}
-            </div>
+            <p className="mt-8 max-w-[52ch] text-[14px] leading-[1.7] text-bone-faint">Under the hood: {p.stack.join(', ')}.</p>
           </Reveal>
         </div>
       </div>
@@ -448,10 +422,10 @@ function MedicastWinSpread() {
     <div className="mt-20 md:mt-28 max-w-[760px]">
       <Reveal>
         <div className="flex items-baseline justify-between mb-4">
-          <span className="font-mono text-[11px] tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>
+          <span className="font-mono text-[12px] tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>
             ★ AUSTIN · SXSW · WINNERS
           </span>
-          <span className="font-mono text-[10px] tracking-[0.22em] text-bone-faint">
+          <span className="font-mono text-[12px] tracking-[0.22em] text-bone-faint">
             META LLAMA HACKATHON
           </span>
         </div>
@@ -482,7 +456,7 @@ function MedicastWinSpread() {
       </div>
       <Reveal delay={0.3}>
         <p className="mt-5 max-w-[60ch] text-bone-mute text-[15.5px] leading-[1.7]">
-          We won the Meta Llama–sponsored hackathon at SXSW in Austin. One of my favorite memories — me, my brother <span className="text-bone">Kesav</span>, and our friend <span className="text-bone">Zanir</span>.
+          We won the Meta Llama-sponsored hackathon at SXSW in Austin. One of my favorite memories: me, my brother <span className="text-bone">Kesav</span>, and our friend <span className="text-bone">Zanir</span>.
         </p>
       </Reveal>
     </div>
@@ -516,10 +490,10 @@ function Waveform({ progress }: { progress: ReturnType<typeof useScroll>['scroll
       >
         <div className="absolute -top-2 -left-1 w-2 h-2 rounded-full" style={{ background: 'var(--color-ember)' }} />
       </motion.div>
-      <div className="mt-3 flex justify-between font-mono text-[10px] tracking-[0.2em] text-bone-faint">
-        <span>00:00</span>
-        <span>CARDIOLOGY · EP 14</span>
-        <span>22:14</span>
+      <div className="mt-3 flex justify-between font-mono text-[12px] tracking-[0.2em] text-bone-faint">
+        <span>START</span>
+        <span>ILLUSTRATIVE WAVEFORM · SCRUBS AS YOU SCROLL</span>
+        <span>END</span>
       </div>
     </div>
   )
@@ -532,13 +506,11 @@ function ActingSection() {
     <section id="project-acting" className="gutter py-32 md:py-40 border-t border-ink-3 relative overflow-hidden scroll-mt-8">
       <Reveal>
         <div className="flex items-baseline gap-4 mb-3">
-          <span className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">04 · 2021 — 2022</span>
-          <span className="text-[11px] uppercase tracking-[0.2em] text-bone-faint">Background actor</span>
+          <span className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">04 · 2021 to 2022</span>
+          <span className="text-[12px] uppercase tracking-[0.2em] text-bone-faint">Background actor</span>
         </div>
       </Reveal>
-      <Reveal delay={0.05}>
-        <h2 className="font-display text-6xl md:text-[120px] leading-[0.92] tracking-tight">Acting.</h2>
-      </Reveal>
+      <RevealHeading delay={0.05}><h2 className="font-display text-6xl md:text-[120px] leading-[0.92] tracking-tight">Acting.</h2></RevealHeading>
 
       <div className="mt-10">
         <ActingCarousel />
@@ -561,13 +533,7 @@ function ActingSection() {
             </div>
           </Reveal>
           <Reveal delay={0.4}>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {["Don't Look Up · 2021", 'BofA Corporate', 'Stroller Commercial'].map((s) => (
-                <span key={s} className="font-mono text-[11px] tracking-wide text-bone-faint border border-ink-3 rounded-full px-3 py-1">
-                  {s}
-                </span>
-              ))}
-            </div>
+            <p className="mt-8 max-w-[52ch] text-[14px] leading-[1.7] text-bone-faint">Credits: Don't Look Up (2021), a Bank of America training video, a stroller commercial.</p>
           </Reveal>
         </div>
       </div>
@@ -593,15 +559,16 @@ function ActingCarousel() {
   const containerRef = useRef<HTMLDivElement>(null)
   const hasBeenSeen = useRef(false)
   const total = ACTING_SLIDES.length
+  const reduce = useReducedMotion()
 
   // Only auto-advance while the carousel is on-screen AND not hover-paused.
   // This prevents the slide from being on image 3 by the time the visitor
   // actually scrolls down to it.
   useEffect(() => {
-    if (paused || !inView) return
+    if (paused || !inView || reduce) return
     const t = setTimeout(() => setIndex((i) => (i + 1) % total), SLIDE_DURATION)
     return () => clearTimeout(t)
-  }, [index, paused, inView, total])
+  }, [index, paused, inView, total, reduce])
 
   // Track in-view AND reset to image 1 the FIRST time it scrolls into view
   // so visitors always see the carousel start from the beginning.
@@ -622,21 +589,12 @@ function ActingCarousel() {
     return () => observer.disconnect()
   }, [])
 
-  // Arrow-key navigation when carousel is in view
-  useEffect(() => {
-    if (!inView) return
-    const handler = (e: KeyboardEvent) => {
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
-      // Don't hijack arrows when user is typing somewhere
-      const target = e.target as HTMLElement
-      if (target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable) return
-      e.preventDefault()
-      if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + total) % total)
-      if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % total)
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [inView, total])
+  // Arrow keys only work while the carousel itself has focus, so they never
+  // steal scrolling or typing elsewhere on the page.
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); setIndex((i) => (i - 1 + total) % total) }
+    if (e.key === 'ArrowRight') { e.preventDefault(); setIndex((i) => (i + 1) % total) }
+  }
 
   const slide = ACTING_SLIDES[index]
 
@@ -644,10 +602,29 @@ function ActingCarousel() {
     <div
       ref={containerRef}
       className="relative"
+      tabIndex={0}
+      role="group"
+      aria-label="Don't Look Up stills. Use left and right arrow keys to change slides."
+      onKeyDown={onKeyDown}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <div className="relative overflow-hidden rounded-sm bg-ink-2" style={{ aspectRatio: '16 / 9' }}>
+        {/* Letterbox bars open once when the stills first come into view */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-x-0 top-0 z-10 h-[14%] origin-top bg-ink"
+          initial={{ scaleY: reduce ? 0 : 1 }}
+          animate={{ scaleY: inView || hasBeenSeen.current ? 0 : 1 }}
+          transition={{ duration: 1.4, ease: [0.19, 1, 0.22, 1] }}
+        />
+        <motion.div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 z-10 h-[14%] origin-bottom bg-ink"
+          initial={{ scaleY: reduce ? 0 : 1 }}
+          animate={{ scaleY: inView || hasBeenSeen.current ? 0 : 1 }}
+          transition={{ duration: 1.4, ease: [0.19, 1, 0.22, 1] }}
+        />
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -685,12 +662,12 @@ function ActingCarousel() {
                     borderColor: 'var(--color-ember)',
                     transform: 'translate(-50%, -50%)',
                   }}
-                  animate={{ scale: [1, 1.18, 1], opacity: [0.9, 0.4, 0.9] }}
-                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={reduce ? { opacity: 0.9 } : { scale: [1, 1.18, 1], opacity: [0.9, 0.4, 0.9] }}
+                  transition={{ duration: 2.4, repeat: reduce ? 0 : Infinity, ease: 'easeInOut' }}
                 />
                 {/* Tiny label */}
                 <div
-                  className="absolute font-mono text-[9px] tracking-[0.24em] uppercase whitespace-nowrap"
+                  className="absolute font-mono text-[12px] tracking-[0.24em] uppercase whitespace-nowrap"
                   style={{
                     color: 'var(--color-ember)',
                     top: 'clamp(38px, 4.6vw, 58px)',
@@ -707,7 +684,7 @@ function ActingCarousel() {
         </AnimatePresence>
 
         {/* Counter */}
-        <div className="absolute top-4 right-5 font-mono text-[10px] uppercase tracking-[0.22em] text-bone-faint">
+        <div className="absolute top-4 right-5 font-mono text-[12px] uppercase tracking-[0.22em] text-bone-faint">
           <span className="text-bone">{String(index + 1).padStart(2, '0')}</span>
           <span className="opacity-60"> / {String(total).padStart(2, '0')}</span>
         </div>
@@ -757,10 +734,10 @@ function ActingCarousel() {
 
       {/* Caption */}
       <div className="mt-3 flex items-baseline justify-between gap-4">
-        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone-faint">
+        <span className="font-mono text-[12px] uppercase tracking-[0.22em] text-bone-faint">
           {slide.caption}
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>
+        <span className="font-mono text-[12px] uppercase tracking-[0.22em]" style={{ color: 'var(--color-ember)' }}>
           {slide.credit}
         </span>
       </div>

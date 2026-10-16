@@ -20,7 +20,7 @@ export function AskPill() {
     >
       <Link
         to="/ask"
-        className="group flex items-center rounded-full border border-ink-3 bg-ink/85 backdrop-blur-md shadow-[0_14px_30px_-10px_rgba(0,0,0,0.5)] hover:border-ember transition-colors p-1.5 sm:gap-3 sm:pl-2 sm:pr-4 sm:py-2"
+        className="group flex items-center rounded-full border border-ink-3 bg-ink hover:border-ember transition-colors p-1.5 sm:gap-3 sm:pl-2 sm:pr-4 sm:py-2"
         aria-label="Ask Pranav"
       >
         <div
@@ -31,7 +31,7 @@ export function AskPill() {
         </div>
         {/* Text label hidden on mobile, visible from sm: up */}
         <div className="hidden sm:flex flex-col">
-          <span className="text-[11px] uppercase tracking-[0.18em] text-bone-faint group-hover:text-ember transition-colors">
+          <span className="text-[12px] uppercase tracking-[0.18em] text-bone-mute group-hover:text-ember transition-colors">
             Talk to my twin
           </span>
           <span className="text-[12px] text-bone leading-tight">

@@ -1,47 +1,13 @@
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
-import {
-  Bot,
-  Dna,
-  Camera,
-  Plane,
-  BookOpen,
-  Clapperboard,
-  Laptop,
-  Globe2,
-  Palette,
-  Headphones,
-  Zap,
-} from 'lucide-react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
-// Basketball icon — lucide-react doesn't ship one, so this mirrors their
-// stroke convention (24x24 viewBox, currentColor, props for size/strokeWidth).
-function Basketball({ size = 24, strokeWidth = 2, style }: { size?: number; strokeWidth?: number; style?: React.CSSProperties }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      style={style}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="2" x2="12" y2="22" />
-      <path d="M 4.93 4.93 C 9 9 9 15 4.93 19.07" />
-      <path d="M 19.07 4.93 C 15 9 15 15 19.07 19.07" />
-    </svg>
-  )
-}
 import { profile } from '../data/profile'
 import { Reveal, SplitWords } from '../components/Reveal'
 import pranavPhoto from '../assets/pranav.jpg'
 import googleLogo from '../assets/google.png'
 import { EmailMenu } from '../components/EmailMenu'
+import { PixelPranav } from '../components/PixelPranav'
 import kelloggLogo from '../assets/kellogg.png'
 import brandeisLogo from '../assets/brandeis.svg'
 import deloitteLogo from '../assets/deloitte.svg'
@@ -58,30 +24,42 @@ export function Home() {
   )
 }
 
+const TWIN_LINES = [
+  "Hi. I'm the one that doesn't need sleep.",
+  'Ask me about Google. Or the temple. Both are fair.',
+  "He wrote my system prompt. I'm still deciding how I feel about it.",
+  'The real one is on the left. He has strong opinions about pickleball.',
+]
+
+function useTwinLine() {
+  const reduce = useReducedMotion()
+  const [line, setLine] = useState(0)
+  const [chars, setChars] = useState(reduce ? TWIN_LINES[0].length : 0)
+
+  useEffect(() => {
+    if (reduce) return
+    const full = TWIN_LINES[line].length
+    if (chars < full) {
+      const t = window.setTimeout(() => setChars((c) => c + 1), 32)
+      return () => window.clearTimeout(t)
+    }
+    const t = window.setTimeout(() => {
+      setLine((l) => (l + 1) % TWIN_LINES.length)
+      setChars(0)
+    }, 3400)
+    return () => window.clearTimeout(t)
+  }, [line, chars, reduce])
+
+  const text = TWIN_LINES[line]
+  return { shown: text.slice(0, chars), full: text, typing: chars < text.length }
+}
+
 function Hero() {
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const photoY = useTransform(scrollYProgress, [0, 1], ['0%', '14%'])
-  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.08])
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-12%'])
+  const twin = useTwinLine()
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-[88svh] gutter pt-6 pb-16 md:pt-10 md:pb-20 grid md:grid-cols-12 gap-10 items-center overflow-hidden"
-    >
-      {/* Editorial gridlines that appear behind hero only */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.035]" aria-hidden>
-        <div className="h-full w-full" style={{
-          backgroundImage:
-            'linear-gradient(to right, var(--color-bone) 1px, transparent 1px), linear-gradient(to bottom, var(--color-bone) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-        }} />
-      </div>
-
-      <FloatingIcons />
-
-      <motion.div style={{ y: textY }} className="md:col-span-7 relative z-10">
+    <section className="relative min-h-[88svh] gutter pt-6 pb-16 md:pt-10 md:pb-24 grid md:grid-cols-12 gap-12 md:gap-8 items-center">
+      <div className="md:col-span-7 relative z-10">
         <h1 className="font-display font-medium leading-[0.92] tracking-tight text-balance" style={{ fontSize: 'clamp(52px, 8vw, 120px)' }}>
           <SplitWords text="Pranav" stagger={0.08} />
           <br />
@@ -89,24 +67,42 @@ function Hero() {
             <SplitWords text="Varanasi." stagger={0.08} delay={0.1} />
           </span>
         </h1>
-        <Reveal delay={0.6} className="mt-8 max-w-[34ch] text-[18px] md:text-[21px] text-bone-mute leading-snug text-pretty">
-          {profile.tagline} I'm at Northwestern Kellogg getting a joint MBA and AI degree, fresh off a summer at Google, and looking for a full-time role as a deployment strategist or product manager.
+        <Reveal delay={0.6} className="mt-8 max-w-[26ch] font-display text-[28px] md:text-[38px] leading-[1.08] tracking-tight text-bone text-balance">
+          I get AI into real organizations, then make sure people use it.
         </Reveal>
-      </motion.div>
-
-      <motion.div
-        style={{ y: photoY, scale: photoScale }}
-        className="md:col-span-5 relative z-0"
-      >
-        <div className="relative">
-          <div
-            className="absolute -inset-8 rounded-full blur-3xl opacity-50"
-            style={{ background: 'radial-gradient(circle, var(--color-ember-glow) 0%, transparent 70%)' }}
-          />
-          <div
-            className="relative overflow-hidden rounded-[2px] mx-auto"
-            style={{ height: 'min(46vh, 600px)', aspectRatio: '4 / 5', maxWidth: '78%' }}
+        <Reveal delay={0.75} className="mt-6 max-w-[52ch] text-[16px] md:text-[17px] text-bone-mute leading-[1.65] text-pretty">
+          Joint MBA and AI degree at Kellogg and McCormick. Fresh off a summer at Google, four years of Deloitte GenAI before that. Looking for a deployment strategist or product manager role starting spring 2027.
+        </Reveal>
+        <Reveal delay={0.9} className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a
+            href={`mailto:${profile.email}?subject=${encodeURIComponent('Saw your site, pranavtech.me')}`}
+            className="inline-flex items-center px-6 py-3.5 font-mono text-[12px] uppercase tracking-[0.18em] transition-opacity hover:opacity-90"
+            style={{ background: 'var(--color-ember)', color: 'var(--color-ink)' }}
           >
+            Email me
+          </a>
+          <Link to="/ask" className="font-mono text-[12px] uppercase tracking-[0.18em] text-bone hover:text-ember transition-colors">
+            Ask my twin first
+          </Link>
+          <a
+            href={profile.links.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="font-mono text-[12px] uppercase tracking-[0.18em] text-bone-mute hover:text-bone transition-colors"
+          >
+            LinkedIn
+          </a>
+        </Reveal>
+      </div>
+
+      {/* Two Pranavs: the human and the twin, same frame, labelled plainly. */}
+      <div className="md:col-span-5 relative z-0 grid grid-cols-2 gap-4 md:gap-5 items-start">
+        <motion.figure
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.4, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
+        >
+          <div className="overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
             <img
               src={pranavPhoto}
               alt="Pranav Varanasi"
@@ -114,61 +110,41 @@ function Hero() {
               style={{ filter: 'contrast(1.04) saturate(0.95)' }}
             />
           </div>
-        </div>
-      </motion.div>
+          <figcaption className="mt-4">
+            <div className="font-display text-[26px] leading-none tracking-tight text-bone">Human</div>
+            <div className="mt-1.5 text-[14px] text-bone-mute">The real one.</div>
+          </figcaption>
+        </motion.figure>
 
-    </section>
-  )
-}
-
-const FLOATING_ICONS = [
-  { Icon: Basketball,   top: '14%', left: '46%', size: 40, drift: 14, dur: 5.2, rot: -8,  delay: 0.0, op: 0.85 },
-  { Icon: Bot,          top: '78%', left: '8%',  size: 32, drift: 10, dur: 4.4, rot:  6,  delay: 0.4, op: 0.75 },
-  { Icon: Dna,          top: '22%', left: '4%',  size: 28, drift: 12, dur: 4.8, rot: -5,  delay: 0.9, op: 0.7  },
-  { Icon: Camera,       top: '8%',  left: '88%', size: 30, drift:  9, dur: 4.0, rot:  10, delay: 0.2, op: 0.8  },
-  { Icon: Plane,        top: '40%', left: '92%', size: 34, drift: 14, dur: 5.6, rot: -12, delay: 0.7, op: 0.85 },
-  { Icon: BookOpen,     top: '88%', left: '54%', size: 28, drift: 10, dur: 4.6, rot:  4,  delay: 0.3, op: 0.7  },
-  { Icon: Clapperboard, top: '64%', left: '42%', size: 26, drift:  8, dur: 4.2, rot: -6,  delay: 1.1, op: 0.75 },
-  { Icon: Laptop,       top: '32%', left: '38%', size: 24, drift:  9, dur: 5.0, rot:  8,  delay: 1.4, op: 0.65 },
-  { Icon: Globe2,       top: '54%', left: '6%',  size: 30, drift: 12, dur: 5.4, rot: -10, delay: 0.6, op: 0.8  },
-  { Icon: Palette,      top: '92%', left: '24%', size: 24, drift:  8, dur: 4.4, rot:  5,  delay: 1.0, op: 0.65 },
-  { Icon: Headphones,   top: '6%',  left: '24%', size: 24, drift:  9, dur: 4.6, rot: -4,  delay: 1.3, op: 0.7  },
-  { Icon: Zap,          top: '48%', left: '34%', size: 22, drift:  7, dur: 3.8, rot:  3,  delay: 1.6, op: 0.6  },
-]
-
-function FloatingIcons() {
-  return (
-    // Hide on phones — the absolute-positioned icons scatter across the
-    // stacked mobile layout and overlap the photo / text.
-    <div className="pointer-events-none absolute inset-0 overflow-hidden hidden sm:block" aria-hidden>
-      {FLOATING_ICONS.map((it, i) => {
-        const Icon = it.Icon
-        return (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{ top: it.top, left: it.left, color: 'var(--color-ember)', willChange: 'transform' }}
-            initial={{ opacity: 0, scale: 0.4 }}
-            animate={{
-              opacity: [0, it.op, it.op * 0.75, it.op],
-              scale: 1,
-              y: [0, -it.drift, 0, it.drift * 0.6, 0],
-              x: [0, it.drift * 0.4, 0, -it.drift * 0.4, 0],
-              rotate: [0, it.rot, 0, -it.rot, 0],
-            }}
-            transition={{
-              opacity: { duration: 1.4, delay: it.delay, times: [0, 0.4, 0.7, 1] },
-              scale: { duration: 0.9, delay: it.delay, ease: [0.16, 1, 0.3, 1] },
-              y: { duration: it.dur, repeat: Infinity, ease: 'easeInOut', delay: it.delay },
-              x: { duration: it.dur * 1.3, repeat: Infinity, ease: 'easeInOut', delay: it.delay },
-              rotate: { duration: it.dur * 1.2, repeat: Infinity, ease: 'easeInOut', delay: it.delay },
-            }}
+        <motion.figure
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.55, ease: [0.19, 1, 0.22, 1] }}
+        >
+          <div
+            className="relative flex items-end justify-center overflow-hidden"
+            style={{ aspectRatio: '4 / 5', background: 'oklch(0.3 0.06 150)' }}
           >
-            <Icon size={it.size} strokeWidth={1.6} style={{ filter: 'drop-shadow(0 0 14px var(--color-ember-glow))' }} />
-          </motion.div>
-        )
-      })}
-    </div>
+            <div className="origin-bottom scale-[0.62] sm:scale-[0.8] md:scale-[0.62] lg:scale-[0.8]">
+              <PixelPranav scale={9} mood={twin.typing ? 'speak' : 'idle'} />
+            </div>
+          </div>
+          <figcaption className="mt-4">
+            <div className="font-display text-[26px] leading-none tracking-tight" style={{ color: 'var(--color-ember)' }}>Twin</div>
+            <div className="mt-1.5 text-[14px] text-bone-mute">The AI one.</div>
+          </figcaption>
+        </motion.figure>
+
+        <div className="col-span-2 mt-2 border border-ink-3 bg-ink-2 p-5">
+          <p className="min-h-[3.2em] text-[17px] leading-snug text-bone text-pretty" aria-label={twin.full}>
+            <span aria-hidden>{twin.shown}</span>
+          </p>
+          <Link to="/ask" className="mt-3 inline-block text-[14px] text-bone-mute hover:text-ember transition-colors">
+            It's Claude running a prompt I wrote. Talk to it →
+          </Link>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -178,14 +154,14 @@ function Now() {
       <div className="grid md:grid-cols-12 gap-10">
         <div className="md:col-span-3">
           <Reveal>
-            <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">Right now</div>
+            <div className="text-[12px] uppercase tracking-[0.24em] text-bone-faint">Right now</div>
             <h2 className="mt-4 font-display text-4xl md:text-5xl">One wrapped, one in progress.</h2>
           </Reveal>
         </div>
         <div className="md:col-span-9 grid md:grid-cols-2 gap-10 md:gap-14">
           {/* Google */}
           <Reveal>
-            <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">01</div>
+            <div className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">01</div>
             <h3 className="mt-4 font-display text-3xl md:text-[34px] tracking-tight">Google · Summer 2026</h3>
 
             <PeopleOpsAIDiagram />
@@ -197,7 +173,7 @@ function Now() {
 
           {/* Northwestern MBAi */}
           <Reveal delay={0.1}>
-            <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">02</div>
+            <div className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">02</div>
             <h3 className="mt-4 font-display text-3xl md:text-[34px] tracking-tight">Northwestern · MBAi</h3>
 
             <MBAiDiagram />
@@ -211,7 +187,7 @@ function Now() {
       {/* Looking for: its own band, same 3/9 split as the section above */}
       <div className="mt-20 md:mt-28 pt-12 md:pt-16 border-t border-ink-3 grid md:grid-cols-12 gap-10">
         <Reveal className="md:col-span-3">
-          <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">What's next</div>
+          <div className="text-[12px] uppercase tracking-[0.24em] text-bone-faint">What's next</div>
         </Reveal>
         <Reveal delay={0.1} className="md:col-span-9">
           <h3 className="font-display text-4xl md:text-6xl tracking-tight text-balance">
@@ -335,7 +311,7 @@ function PeopleOpsAIDiagram() {
       {/* Bottom rule with metadata, mirrors MBAi card */}
       <div className="mt-6 pt-4 border-t border-ink-3 flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-bone-faint">
         <span>AI Ops Program Manager Intern · NYC</span>
-        <span className="text-bone-mute">→ Jun — Aug 2026</span>
+        <span className="text-bone-mute">→ Jun to Aug 2026</span>
       </div>
     </div>
   )
@@ -346,7 +322,7 @@ function Bio() {
     <section className="gutter py-24 md:py-36 border-t border-ink-3">
       <div className="max-w-[68ch] mx-auto">
         <Reveal>
-          <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint mb-6">A short version</div>
+          <div className="text-[12px] uppercase tracking-[0.24em] text-bone-faint mb-6">A short version</div>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="font-display text-[28px] md:text-[37px] leading-[1.18] tracking-tight text-pretty">
@@ -373,7 +349,7 @@ function Path() {
   const stops: PathStop[] = [
     {
       year: '2017',
-      yearRange: '2017 — 2021',
+      yearRange: '2017 to 2021',
       place: 'Brandeis University',
       city: 'Waltham, MA',
       title: 'Health Policy',
@@ -383,7 +359,7 @@ function Path() {
     },
     {
       year: '2021',
-      yearRange: '2021 — 2025',
+      yearRange: '2021 to 2025',
       place: 'Deloitte',
       city: 'Austin, TX',
       title: 'AI Strategy',
@@ -393,7 +369,7 @@ function Path() {
     },
     {
       year: '2025',
-      yearRange: '2025 — 2027',
+      yearRange: '2025 to 2027',
       place: 'Northwestern',
       city: 'Evanston, IL',
       title: 'MBAi',
@@ -425,7 +401,7 @@ function PathBody({ stops }: { stops: PathStop[] }) {
       <Reveal>
         <div className="flex items-baseline justify-between mb-16 md:mb-24">
           <div>
-            <div className="text-[11px] uppercase tracking-[0.24em] text-bone-faint">The path</div>
+            <div className="text-[12px] uppercase tracking-[0.24em] text-bone-faint">The path</div>
             <h2 className="mt-3 font-display text-5xl md:text-7xl tracking-tight">How I got here.</h2>
           </div>
           <div className="font-mono text-[11px] text-bone-faint hidden md:block">2017 → 2026</div>
@@ -459,7 +435,7 @@ function PathChapter({ stop, index, total }: { stop: PathStop; index: number; to
   const left = index % 2 === 0
   const ref = useRef<HTMLLIElement>(null)
   const { scrollYProgress: chapterProgress } = useScroll({ target: ref, offset: ['start 0.9', 'start 0.4'] })
-  const chapterOpacity = useTransform(chapterProgress, [0, 1], [0.32, 1])
+  const chapterOpacity = useTransform(chapterProgress, [0, 1], [0.5, 1])
 
   return (
     <motion.li ref={ref} className="relative" style={{ opacity: chapterOpacity }}>
@@ -489,7 +465,7 @@ function PathChapter({ stop, index, total }: { stop: PathStop; index: number; to
           <div className={['flex items-start gap-4', left ? 'md:flex-row-reverse md:text-right md:justify-start' : 'md:text-left md:justify-start'].join(' ')}>
             <PathIcon kind={stop.icon} />
             <div>
-              <div className="font-mono text-[11px] tracking-[0.2em] text-bone-faint">
+              <div className="font-mono text-[12px] tracking-[0.2em] text-bone-faint">
                 {stop.yearRange ?? stop.year}
               </div>
               <div className="font-display text-[28px] md:text-[40px] leading-[1.05] tracking-tight mt-1">

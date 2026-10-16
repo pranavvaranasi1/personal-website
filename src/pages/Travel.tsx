@@ -415,7 +415,7 @@ function Globe({ active, setActive }: GlobeProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-5 left-5 right-5 md:right-auto md:max-w-md p-5 rounded-sm border border-ink-3 bg-ink/95 backdrop-blur"
+            className="absolute bottom-5 left-5 right-5 md:right-auto md:max-w-md p-5 rounded-sm border border-ink-3 bg-ink"
           >
             <button
               type="button"
