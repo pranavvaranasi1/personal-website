@@ -4,7 +4,7 @@
 **brand** — this is a personal portfolio. Design IS the product.
 
 ## Who
-Pranav Varanasi. Northwestern MBAi student (Kellogg + McCormick). Co-founder of Variant Labs (TechBio AI). Incoming Google AI PM in People Operations (Summer 2026). Ex-Deloitte AI strategy. Builder of three apps (Variant Labs, Adapt, Medicast). Writer on Substack about AI x humanity. Background actor (*Don't Look Up*). Basketball coach. National Parks photographer. Goes to temple. Wears an Om necklace.
+Pranav Varanasi. Northwestern MBAi student (Kellogg + McCormick). Co-founder of Variant Labs (TechBio AI). Google AI Operations Program Manager Intern in People Operations (Summer 2026, completed). Seeking full-time deployment strategist / product manager roles after graduating March 2027. Ex-Deloitte AI strategy. Builder of three apps (Variant Labs, Adapt, Medicast). Writer on Substack about AI x humanity. Background actor (*Don't Look Up*). Basketball coach. National Parks photographer. Goes to temple. Wears an Om necklace.
 
 ## Audience
 Tech recruiters, hiring managers at top tech firms (Google, Anthropic, OpenAI, Meta), MBA peers, people who land here from his LinkedIn or writing. Sophisticated taste. Will spend 30 seconds to 3 minutes. The first 5 seconds decide whether they keep going or close the tab.

@@ -14,7 +14,7 @@ interface Msg {
 
 const SUGGESTIONS = [
   "What's the most interesting thing you did at Deloitte?",
-  'What are you doing at Google this summer?',
+  'What did you work on at Google?',
   "What's the deal with the Don't Look Up role?",
   "What's a book that changed how you think?",
   "What music are you on lately?",
