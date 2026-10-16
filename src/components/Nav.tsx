@@ -10,6 +10,7 @@ const links = [
   { to: '/writing', label: 'Writing' },
   { to: '/books', label: 'Books' },
   { to: '/travel', label: 'Travel' },
+  { to: '/ask', label: 'Ask' },
 ]
 
 export function Nav() {

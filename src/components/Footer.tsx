@@ -19,9 +19,9 @@ export function Footer() {
           </a>
         </div>
       </div>
-      <div className="mt-10 pt-6 border-t border-ink-3 flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-bone-faint">
+      <div className="mt-10 pt-6 border-t border-ink-3 flex items-center justify-between text-[12px] uppercase tracking-[0.2em] text-bone-faint">
         <span>{profile.location}</span>
-        <span>built by hand · {new Date().getFullYear()}</span>
+        <span>built with AI tools, steered by hand · {new Date().getFullYear()}</span>
       </div>
     </footer>
   )

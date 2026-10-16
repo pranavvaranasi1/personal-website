@@ -12,7 +12,7 @@
   --color-ink-4: oklch(0.36 0.014 280);
   --color-bone: oklch(0.96 0.008 80);
   --color-bone-mute: oklch(0.78 0.012 80);
-  --color-bone-faint: oklch(0.55 0.014 80);
+  --color-bone-faint: oklch(0.63 0.014 80);
   /* Accent — emerald green. Was oxblood at hue 25, now hue 150 (green).
      Variable name kept as `ember` so 52 call sites don't have to change. */
   --color-ember: oklch(0.62 0.18 150);
