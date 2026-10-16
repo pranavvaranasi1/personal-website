@@ -67,10 +67,7 @@ function Hero() {
             <SplitWords text="Varanasi." stagger={0.08} delay={0.1} />
           </span>
         </h1>
-        <Reveal delay={0.6} className="mt-8 max-w-[26ch] font-display text-[28px] md:text-[38px] leading-[1.08] tracking-tight text-bone text-balance">
-          I get AI into real organizations, then make sure people use it.
-        </Reveal>
-        <Reveal delay={0.75} className="mt-6 max-w-[52ch] text-[16px] md:text-[17px] text-bone-mute leading-[1.65] text-pretty">
+        <Reveal delay={0.6} className="mt-8 max-w-[52ch] text-[16px] md:text-[17px] text-bone-mute leading-[1.65] text-pretty">
           Joint MBA and AI degree at Kellogg and McCormick. Fresh off a summer at Google, four years of Deloitte GenAI before that. Looking for a deployment strategist or product manager role starting spring 2027.
         </Reveal>
         <Reveal delay={0.9} className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
