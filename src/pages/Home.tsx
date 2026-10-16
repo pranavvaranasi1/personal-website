@@ -117,21 +117,24 @@ function Hero() {
         </motion.figure>
 
         <motion.figure
+          className="group"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.55, ease: [0.19, 1, 0.22, 1] }}
         >
-          <div
-            className="relative flex items-end justify-center overflow-hidden"
-            style={{ aspectRatio: '4 / 5', background: 'oklch(0.3 0.06 150)' }}
-          >
-            <div className="origin-bottom scale-[0.62] sm:scale-[0.8] md:scale-[0.62] lg:scale-[0.8]">
-              <PixelPranav scale={9} mood={twin.typing ? 'speak' : 'idle'} />
+          <Link to="/ask" aria-label="Talk to Pranav's digital twin" className="block">
+            <div
+              className="relative flex items-end justify-center overflow-hidden outline outline-2 outline-transparent group-hover:outline-[var(--color-ember)] transition-[outline-color] duration-200"
+              style={{ aspectRatio: '4 / 5', background: 'oklch(0.3 0.06 150)' }}
+            >
+              <div className="origin-bottom scale-[0.62] sm:scale-[0.8] md:scale-[0.62] lg:scale-[0.8]">
+                <PixelPranav scale={9} mood={twin.typing ? 'speak' : 'idle'} />
+              </div>
             </div>
-          </div>
+          </Link>
           <figcaption className="mt-4">
             <div className="font-display text-[26px] leading-none tracking-tight" style={{ color: 'var(--color-ember)' }}>Twin</div>
-            <div className="mt-1.5 text-[14px] text-bone-mute">The AI one.</div>
+            <div className="mt-1.5 text-[14px] text-bone-mute">The AI one. Click to talk to it.</div>
           </figcaption>
         </motion.figure>
 
