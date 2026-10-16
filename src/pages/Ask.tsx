@@ -4,7 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { CharacterPicker } from '../components/CharacterPicker'
 import { CoffeeShop } from '../components/CoffeeShop'
 import type { CharacterId } from '../components/PixelVisitor'
-import { askPranavSystemPrompt, profile } from '../data/profile'
+import { profile } from '../data/profile'
 
 interface Msg {
   role: 'user' | 'pranav'
@@ -62,9 +62,6 @@ export function Ask() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-haiku-4-5-20251001',
-          max_tokens: 600,
-          system: askPranavSystemPrompt,
           messages: [...messages, user].map((m) => ({
             role: m.role === 'user' ? 'user' : 'assistant',
             content: m.text,
